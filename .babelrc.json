@@ -1,0 +1,20 @@
+{
+  "sourceType": "unambiguous",
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "chrome": 100,
+          "safari": 15,
+          "firefox": 91
+        },
+        "useBuiltIns": "usage", // Include polyfills based on usage
+        "corejs": 3 // Use core-js version 3 for polyfills
+      }
+    ],
+    "@babel/preset-typescript",
+    "@babel/preset-react"
+  ],
+  "plugins": []
+}

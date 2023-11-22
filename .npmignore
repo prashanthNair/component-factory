@@ -1,0 +1,13 @@
+# Files and directories to exclude from npm package
+node_modules/
+dist/
+build/
+src/        
+*.log
+*.json
+*.lock
+*.md
+
+# Exclude Storybook files and directories
+.storybook/
+src/__stories__/
