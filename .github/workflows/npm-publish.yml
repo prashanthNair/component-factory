@@ -2,8 +2,7 @@ name: NPM Publish
 on:
   push:
     branches:
-      - development
-
+      - develop
 jobs:
   npm-publish:
     runs-on: ubuntu-latest
