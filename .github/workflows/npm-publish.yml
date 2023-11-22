@@ -1,8 +1,10 @@
 name: NPM Publish
+
 on:
   push:
     branches:
       - develop
+
 jobs:
   npm-publish:
     runs-on: ubuntu-latest
@@ -15,17 +17,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 14
+
       - name: Update npm
         run: npm install -g npm@latest
-      - name: Install dependencies
-        run: npm cache clean --force 
-        run: npm ci
 
-      - name: Build and test
-        run: npm run build
+      - name: Install dependencies and Build
+        run: |
+          npm cache clean --force
+          npm ci
+          npm run build
 
       - name: Publish to NPM
-        run: |
-          npm publish
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
