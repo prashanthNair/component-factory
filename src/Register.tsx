@@ -75,7 +75,7 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onSubmit }) => {
       console.log("User created:", data.authoring_createUser.message);
       onSubmit(null, data);
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error("Mutation error:", error);
       onSubmit(error, null);
     },
@@ -96,7 +96,7 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onSubmit }) => {
           },
         },
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Mutation Error:", error);
     }
   };
