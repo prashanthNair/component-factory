@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - develop
-
 jobs:
   npm-publish:
     runs-on: ubuntu-latest
