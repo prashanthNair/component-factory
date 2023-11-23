@@ -3,7 +3,7 @@ name: NPM Publish and Trigger Downstream
 on:
   push:
     branches:
-      - develop
+      - development
 
 jobs:
   npm-publish:
@@ -26,6 +26,12 @@ jobs:
 
       - name: Bump Version
         run: npm version patch -m "Bump version to %s"
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build # Adjust this command based on your project's build script
 
       - name: Publish to NPM
         run: npm publish
