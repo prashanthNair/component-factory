@@ -3,12 +3,12 @@ on:
   push:
     branches:
       - develop
-options:
-  timestamps: true
 
 jobs:
   npm-publish:
     runs-on: ubuntu-latest
+    outputs:
+      timestamp: ${{ steps.set-timestamp.outputs.timestamp }}
 
     steps:
       - name: Checkout
