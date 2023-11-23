@@ -1,11 +1,10 @@
 name: NPM Publish
-options:
-  timestamps: true
-
 on:
   push:
     branches:
       - develop
+options:
+  timestamps: true
 
 jobs:
   npm-publish:
