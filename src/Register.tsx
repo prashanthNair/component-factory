@@ -71,11 +71,11 @@ export type UserRegistrationProps = {
 const UserRegistration: React.FC<UserRegistrationProps> = ({ onSubmit }) => {
   const [createUser, { loading, error }] = useMutation(CREATE_USER, {
     client: getGraphQLClient(),
-    onCompleted: (data) => {
+    onCompleted: (data: any) => {
       console.log("User created:", data.authoring_createUser.message);
       onSubmit(null, data);
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error("Mutation error:", error);
       onSubmit(error, null);
     },
