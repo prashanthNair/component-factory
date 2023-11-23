@@ -1,4 +1,6 @@
 name: NPM Publish
+options:
+  timestamps: true
 
 on:
   push:
@@ -20,7 +22,7 @@ jobs:
       - name: Update npm
         run: npm install -g npm@latest
       - name: Authenticate with NPM
-        run: npm adduser
+        run: npm adduser --registry=https://registry.npmjs.org/ --loglevel verbose
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       # - name: Install dependencies and Build
