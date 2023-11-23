@@ -1,6 +1,6 @@
 {
   "name": "x-user-registration",
-  "version": "1.6.0",
+  "version": "1.7.1",
   "types": "index.d.ts",
   "description": "",
   "main": "dist/user-register.bundle.js",
@@ -9,6 +9,10 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "publish-package": "npm publish --access public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prashanthNair/component-factory.git"
   },
   "author": "",
   "license": "ISC",

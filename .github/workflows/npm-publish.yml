@@ -1,9 +1,8 @@
-name: NPM Publish and Deployment
-
+name: NPM Publish
 on:
   push:
     branches:
-      - development
+      - develop
 
 jobs:
   npm-publish:
@@ -17,53 +16,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
+          registry-url: https://registry.npmjs.org/
 
-      # - name: Update npm
-      #   run: npm install -g npm@latest
+      - name: Configure Git
+        run: |
+          git config --global user.email "Prashanthmsktm@gmail.com"
+          git config --global user.name "prashanthNair "
 
-      # - name: Install dependencies and Build
-      #   run: |
-      #     npm cache clean --force
-      #     npm ci --legacy-peer-deps
-      #     npm run build
+      - name: Bump Version
+        run: npm version patch -m "Bump version to %s"
 
       - name: Publish to NPM
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-  trigger-deployment:
-    runs-on: ubuntu-latest
-    needs: npm-publish
-    steps:
-      - name: Trigger Deployment Of Authoring
-        uses: actions/github-script@v5
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { context, GitHub } = require('github-script');
-            const github = new GitHub(process.env.GITHUB_TOKEN);
-
-            const owner = 'hcl-x';
-            const repo = 'hep-authoring-ui';
-            const branch = 'mavericks_dev';  
-
-            // Get the workflow ID for the target repository and workflow
-            const workflowResponse = await github.actions.listRepoWorkflows({
-              owner: owner,
-              repo: repo,
-            });
-
-            const workflow = workflowResponse.data.workflows.find(w => w.name === 'deploy-all.yaml');
-
-            if (workflow) {
-              // Trigger the workflow for the specified branch
-              await github.actions.createWorkflowDispatch({
-                owner: owner,
-                repo: repo,
-                workflow_id: workflow.id,
-                ref: branch,
-              });
-            } else {
-              console.log('Workflow not found.');
-            }
