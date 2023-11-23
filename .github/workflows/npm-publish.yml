@@ -21,8 +21,8 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config --global user.email "Prashanthmsktm@gmail.com"
-          git config --global user.name "prashanthNair "
+          git config --global user.email "$(git log -1 --format='%ae')"
+          git config --global user.name "$(git log -1 --format='%an')"
 
       - name: Bump Version
         run: npm version patch -m "Bump version to %s"
@@ -31,8 +31,7 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run build # Adjust this command based on your project's build script
-
+        run: npm run build
       - name: Publish to NPM
         run: npm publish
         env:
