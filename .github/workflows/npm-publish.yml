@@ -17,14 +17,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-
       - name: Update npm
         run: npm install -g npm@latest
 
       - name: Install dependencies and Build
         run: |
           npm cache clean --force
-          npm ci
+          npm ci --legacy-peer-deps
           npm run build
 
       - name: Publish to NPM
