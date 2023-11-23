@@ -3,7 +3,7 @@ name: NPM Publish and Trigger Downstream
 on:
   push:
     branches:
-      - development
+      - develop
 
 jobs:
   npm-publish:
