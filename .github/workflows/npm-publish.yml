@@ -18,12 +18,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: Update npm
-        run: npm install -g npm@latest
-      - name: Authenticate with NPM
-        run: npm adduser --registry=https://registry.npmjs.org/ --loglevel verbose
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          registry-url: https://registry.npmjs.org/
+      # - name: Update npm
+      #   run: npm install -g npm@latest
+      # - name: Authenticate with NPM
+      #   run: npm adduser --registry=https://registry.npmjs.org/ --loglevel verbose
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       # - name: Install dependencies and Build
       #   run: |
       #     npm cache clean --force
