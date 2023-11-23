@@ -1,4 +1,5 @@
-name: NPM Publish
+name: NPM Publish and Trigger Downstream
+
 on:
   push:
     branches:
@@ -30,39 +31,7 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-trigger-downstream:
-    needs: npm-publish
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Downstream Repository
-        uses: actions/checkout@v3
-        with:
-          repository: hcl-x/hep-authoring-ui
-          ref: mavericks_dev
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Update Package Version in Downstream Repository
-        run: |
-          # Extract the latest version from the NPM registry
-          LATEST_VERSION=$(npm show your-package-name version)
-
-          # Update the package.json file in the downstream repository
-          echo "{\"version\": \"$LATEST_VERSION\"}" > package.json
-
-          # Commit the changes
-          git add package.json
-          git commit -m "Update package version to $LATEST_VERSION"
-
-      - name: Push Changes
-        uses: ad-m/github-push-action@master
-        with:
-          branch: mavericks_dev
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   trigger-downstream:
     needs: npm-publish
     runs-on: ubuntu-latest
