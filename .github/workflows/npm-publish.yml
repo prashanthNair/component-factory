@@ -7,8 +7,6 @@ on:
 jobs:
   npm-publish:
     runs-on: ubuntu-latest
-    outputs:
-      timestamp: ${{ steps.set-timestamp.outputs.timestamp }}
 
     steps:
       - name: Checkout
@@ -21,11 +19,16 @@ jobs:
           registry-url: https://registry.npmjs.org/
       # - name: Update npm
       #   run: npm install -g npm@latest
+
       # - name: Authenticate with NPM
       #   run: npm adduser --registry=https://registry.npmjs.org/ --loglevel verbose
       #   env:
       #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      # - name: Install dependencies and Build
+
+      - name: Bump Version
+        run: npm version patch -m "Bump version to %s"
+
+      # - name: Install Dependencies and Build
       #   run: |
       #     npm cache clean --force
       #     npm ci --legacy-peer-deps
