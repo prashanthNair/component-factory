@@ -96,7 +96,7 @@ const UserRegistration: React.FC<UserRegistrationProps> = ({ onSubmit }) => {
           },
         },
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Mutation Error:", error);
     }
   };
